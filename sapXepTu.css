@@ -1,0 +1,37 @@
+body{
+font-family: Arial, sans-serif;
+text-align: center;
+margin-top: 50px;
+}
+#chuBiXaoTron button {
+    font-size: 20px;
+    margin: 5px;
+    padding: 10px;
+}
+#tuDaChon {
+    font-size: 24px;
+    margin: 20px;
+    min-height: 40px;
+}
+#ketQua {
+    font-weight: bold;
+    margin-top: 10px;
+}
+#nutChucNang {
+    margin-top: 10px;
+}
+#manHinhChao button {
+    padding: 15px 30px;
+    font-size: 22px;
+    background-color: #0077cc;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+#manHinhChao {
+    display: block;
+}
+#khungGame {
+    display: none;
+}

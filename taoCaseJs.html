@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Game Sắp Xếp Từ - Cấp Độ & Chương</title>
+  <link rel="stylesheet" href="sapXepTu.css">
+</head>
+<body>
+
+
+<!-- 🎬 Màn hình chào -->
+<div id="manHinhChao">
+  <h1>🎉 Chào mừng đến với Game Sắp Xếp Từ!</h1>
+  <p>🧠 Sắp xếp lại các chữ cái để tạo thành từ đúng!</p>
+  <button onclick="batDauGame()">🚀 Bắt đầu chơi</button>
+</div>
+
+<!-- 🧩 Khung trò chơi chính -->
+<div id="khungGame">
+  <h2>Sắp xếp lại từ đúng (Chương <span id="soChuong">1</span> - Cấp <span id="soCap">1</span>):</h2>
+  <div id="chuBiXaoTron"></div>
+
+  <div id="tuDaChon"></div>
+
+  <div id="nutChucNang">
+    <button onclick="xoaChu()">Xoá</button>
+    <button onclick="kiemTra()">Kiểm tra</button>
+  </div>
+
+  <p id="ketQua"></p>
+  <button id="nutChuongTiep" style="display:none" onclick="batDauChuong(soChuong + 1)">Tiếp tục chương 2</button>
+</div>
+<script src="sapXepTu.js"></script>
+</body>
+</html>
