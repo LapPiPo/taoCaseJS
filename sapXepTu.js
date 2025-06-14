@@ -28,14 +28,18 @@ const cauTraLoiSai = [
     "🔁 Bạn gấp lắm đúng không, bình tĩnh!",
     "🧩 Chưa khớp đâu nha!",
     "😶‍🌫️ Sai 1 tí à!",
-    "📚 Bạn chắc chưa?"
+    "📚 Bạn chắc chưa?, Sai tè le rồi."
 ];
 
-// 🎬 Hàm bắt đầu game
+// Hàm bắt đầu game
 function batDauGame() {
-    document.getElementById("manHinhChao").style.display = "none";
-    document.getElementById("khungGame").style.display = "block";
-    batDauChuong(0);
+    const manHinhChao = document.getElementById("manHinhChao");
+    const khungGame = document.getElementById("khungGame");
+    if (manHinhChao && khungGame) {
+        manHinhChao.style.display = "none";
+        khungGame.style.display = "block";
+        batDauChuong(0);
+    }
 }
 
 // --- XÁO TRỘN ---
@@ -54,25 +58,23 @@ function xaoTronTu(tu) {
 }
 
 function batDauChuong(so) {
+    if (so >= cacChuong.length) return;
     soChuong = so;
     viTriCapDo = 0;
-    document.getElementById("soChuong").innerText = so + 1;
+    document.getElementById("soChuong").innerText = soChuong + 1;
     document.getElementById("nutChuongTiep").style.display = "none";
     hienTuMoi();
 }
 
 function hienTuMoi() {
-    let danhSachTu = cacChuong[soChuong];
-    if (viTriCapDo >= danhSachTu.length) {
+    if (viTriCapDo >= cacChuong[soChuong].length) {
         document.getElementById("chuBiXaoTron").innerHTML = "";
         document.getElementById("tuDaChon").innerText = "";
         document.getElementById("ketQua").innerText = "🎉 Hoàn thành chương!";
-        if (soChuong + 1 < cacChuong.length) {
-            document.getElementById("nutChuongTiep").style.display = "inline";
-        }
+        document.getElementById("nutChuongTiep").style.display = (soChuong + 1 < cacChuong.length) ? "inline" : "none";
         return;
     }
-    tuGoc = danhSachTu[viTriCapDo];
+    tuGoc = cacChuong[soChuong][viTriCapDo];
     chuXaoTron = xaoTronTu(tuGoc);
     chuDaChon = [];
     capNhatManHinh();
@@ -102,12 +104,18 @@ function chonNgauNhien(mang) {
 
 function kiemTra() {
     const ketQua = document.getElementById("ketQua");
-    if (chuDaChon.join("") === tuGoc) {
-        ketQua.innerText = chonNgauNhien(cauTraLoiDung);
+
+    if (chuDaChon.length < tuGoc.length) {
+        ketQua.innerText = "⚠️ Bạn chưa chọn đủ chữ!";
+        return;
+    }
+
+    const daDung = chuDaChon.join("") === tuGoc;
+    ketQua.innerText = chonNgauNhien(daDung ? cauTraLoiDung : cauTraLoiSai);
+
+    if (daDung) {
         viTriCapDo++;
         setTimeout(hienTuMoi, 1200);
-    } else {
-        ketQua.innerText = chonNgauNhien(cauTraLoiSai);
     }
 }
 
