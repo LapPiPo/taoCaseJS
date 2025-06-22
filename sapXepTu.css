@@ -1,14 +1,15 @@
 body{
-font-family: Arial, sans-serif;
-text-align: center;
-margin-top: 50px;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin-top: 50px;
+    background-color: #5bd3ed;
 }
 #chuBiXaoTron button {
     font-size: 20px;
     margin: 5px;
     padding: 10px;
 }
-#tuDaChon {
+#chuDaChon {
     font-size: 24px;
     margin: 20px;
     min-height: 40px;
@@ -20,7 +21,7 @@ margin-top: 50px;
 #nutChucNang {
     margin-top: 10px;
 }
-#manHinhChao button {
+#manHinhChao button{
     padding: 15px 30px;
     font-size: 22px;
     background-color: #0077cc;
@@ -32,6 +33,9 @@ margin-top: 50px;
 #manHinhChao {
     display: block;
 }
-#khungGame {
+#khungGame, #nutCapTiep,#nutChoiLai {
     display: none;
+}
+#chuDaChon{
+
 }

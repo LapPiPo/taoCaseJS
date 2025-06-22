@@ -17,19 +17,26 @@
 
 <!-- 🧩 Khung trò chơi chính -->
 <div id="khungGame">
-  <h2>Sắp xếp lại từ đúng (Chương <span id="soChuong">1</span> - Cấp <span id="soCap">1</span>):</h2>
+  <h2>Sắp xếp lại từ đúng (Câp <span id="soCap"></span> - Màn <span id="soMan"></span>):</h2>
+  <p id="soLuotGoiYText">💡 Lượt gợi ý còn lại: 3</p>
+  <p id="soLuotSaiText">💥 Lượt sai: 0 / 3</p>
+
   <div id="chuBiXaoTron"></div>
 
-  <div id="tuDaChon"></div>
+  <div id="chuDaChon"></div>
 
   <div id="nutChucNang">
+    <button onclick="goiY()">Gợi ý</button>
     <button onclick="xoaChu()">Xoá</button>
     <button onclick="kiemTra()">Kiểm tra</button>
   </div>
 
   <p id="ketQua"></p>
-  <button id="nutChuongTiep" style="display:none" onclick="batDauChuong(soChuong + 1)">Tiếp tục chương 2</button>
+  <button id="nutCapTiep" onclick="batDauCap(soCap + 1 )">Cấp Độ Tiếp Theo</button>
+  <button id="nutChoiLai" onclick="choiLai()">🔁 Chơi lại từ đầu</button>
+
 </div>
+
 <script src="sapXepTu.js"></script>
 </body>
 </html>
