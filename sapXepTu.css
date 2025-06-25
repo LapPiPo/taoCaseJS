@@ -21,7 +21,7 @@ body{
 #nutChucNang {
     margin-top: 10px;
 }
-#manHinhChao button{
+#manHinhChao button, diemText{
     padding: 15px 30px;
     font-size: 22px;
     background-color: #0077cc;

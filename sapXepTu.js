@@ -16,7 +16,7 @@ let soLuotGoiY = 3;
 let dungLienTiep = 0;
 let soLanSai = 0;
 let dangXuLy = false;
-
+let diem = 0;
 const cauTraLoiDung = [
     "✨ Chính xác!",
     "💯 Tuyệt vời ông mặt trời!",
@@ -39,6 +39,8 @@ const cauTraLoiSai = [
 
 // --- HÀM BẮT ĐẦU GAME ---
 function batDauGame() {
+    diem = parseInt(localStorage.getItem("diemHienTai")) || 0;
+    capNhatDiem(0); // để hiển thị lên giao diện
     const manHinhChao = document.getElementById("manHinhChao");
     const khungGame = document.getElementById("khungGame");
     if (manHinhChao && khungGame) {
@@ -122,7 +124,7 @@ function xaoTronKhongTrung(tu) {
 }
 
 // --- HÀM CHỌN NGẪU NHIÊN KHÔNG TRÙNG ---
-function chonNgauNhienKhongTrung(mang) {
+function dungVaSaiKhongTrung(mang) {
     if (mang.length === 0) return null;  // Nếu mảng rỗng, trả về null
     let index = Math.floor(Math.random() * mang.length); // Chọn ngẫu nhiên một phần tử
     return mang.splice(index, 1)[0];  // Lấy phần tử và xóa khỏi mảng để tránh trùng
@@ -139,20 +141,25 @@ function xoaChu() {
 
 // --- HÀM KIỂM TRA KẾT QUẢ ---
 function kiemTra(){
+     const ketQua = document.getElementById("ketQua");
+
     if (dangXuLy) return;
-    dangXuLy = true;
-
-    const ketQua = document.getElementById("ketQua");
-
-    if (chuDaChon.length < tuGoc.length) {
-        ketQua.innerText = "⚠️ Bạn chưa chọn đủ chữ!";
-        dangXuLy = false;
+    if (chuDaChon.length === 0) {
+        ketQua.innerText = "⚠️ Bạn chưa chọn chữ nào!";
         return;
     }
+
+    if (chuDaChon.length < tuGoc.length) {
+        ketQua.innerText = `⚠️ Bạn còn thiếu ${tuGoc.length - chuDaChon.length} chữ!`;
+        return;
+    }
+    dangXuLy = true;
 
     const daDung = chuDaChon.join("") === tuGoc;
 
     if (daDung) {
+        capNhatDiem(1); // mỗi lần đúng cộng 10 điểm
+
         dungLienTiep++;
         soLanSai = 0;
 
@@ -169,7 +176,7 @@ function kiemTra(){
             return;
         }
 
-        ketQua.innerText = chonNgauNhienKhongTrung(cauTraLoiDung);
+        ketQua.innerText = dungVaSaiKhongTrung(cauTraLoiDung);
         setTimeout(() => {
             viTriSoMan++;
             hienTuMoi();
@@ -180,7 +187,7 @@ function kiemTra(){
         dungLienTiep = 0;
         soLanSai++;
         capNhatSoLuotSai();
-        ketQua.innerText = chonNgauNhienKhongTrung(cauTraLoiSai);
+        ketQua.innerText = dungVaSaiKhongTrung(cauTraLoiSai);
 
         if (soLanSai >= 3) {
             ketQua.innerText = "🚫 Bạn đã hết lượt chơi!";
@@ -228,4 +235,11 @@ function capNhatSoLuotGoiY() {
 
 function capNhatSoLuotSai() {
     document.getElementById("soLuotSaiText").innerText = `💥 Lượt sai: ${soLanSai} / 3`;
+}
+
+//hàm cập nhật và hiển thị điểm
+function capNhatDiem(soDiemMoi = 0) {
+    diem += soDiemMoi;
+    localStorage.setItem("diemHienTai", diem);
+    document.getElementById("diemText").innerText = `⭐ Điểm: ${diem}`;
 }

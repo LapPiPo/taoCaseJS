@@ -8,9 +8,13 @@ const cacCap = [
 let soCap = 0;
 let viTriSoMan = 0;
 let tuGoc = "";
-let ketQuaCu = "";
 let chuBiXaoTron = [];
 let chuDaChon = [];
+let ketQuaCu = "";       // Biến lưu kết quả lần trước để tránh trùng lặp
+let soLuotGoiY = 3;
+let dungLienTiep = 0;
+let soLanSai = 0;
+let dangXuLy = false;
 
 const cauTraLoiDung =   [
     "✨ Chính xác!",
@@ -86,3 +90,34 @@ function hienTuMoi (){
     ketQua1.innerText = ""
     soMan1.innerText = viTriSoMan + 1
 }
+
+//hàm xáo trộn từ không trùng
+function xaoTronKhongTrung(tu){
+    let arr;
+    do{
+        arr = tu.split("")
+        for(let i = arr.length - 1; i > 0 ; i--){
+            const j = Math.floor(Math.random() * (i + 1));
+            [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+    }
+    while(arr.join("") === ketQuaCu)
+    return arr
+}
+
+// hàm chọn câu trả đúng sai không trùng
+function dungVaSaiKhongTrung(mang){
+    if(mang.length === 0)return null
+    let index = Math.floor(Math.random() * mang.length);
+    return mang.splice(index, 1)[0]
+}
+
+//hàm xóa chữ
+function xoaChu(){
+    if(chuDaChon.length > 0){
+        let chu = chuDaChon.pop()
+        chuBiXaoTron.push(chu);
+        capNhatManHinh
+    }
+}
+
